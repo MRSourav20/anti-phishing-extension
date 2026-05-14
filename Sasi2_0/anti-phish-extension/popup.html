@@ -1,0 +1,261 @@
+<head>
+  <meta charset="utf-8" />
+  <title>AntiPhish Guardian</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      margin: 12px;
+      width: 300px;
+      color: #202124;
+    }
+
+    h3 {
+      margin: 0 0 10px 0;
+      font-size: 16px;
+      color: #1a73e8;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 8px;
+    }
+
+    p {
+      margin: 6px 0;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    .status {
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    button {
+      margin-top: 5px;
+      padding: 6px 12px;
+      font-size: 12px;
+      border-radius: 4px;
+      border: 1px solid #dadce0;
+      background: #fff;
+      cursor: pointer;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    button:hover {
+      background: #f1f3f4;
+    }
+
+    hr {
+      border: 0;
+      border-top: 1px solid #eee;
+      margin: 12px 0;
+    }
+
+    .settings-box {
+      background: #f8f9fa;
+      padding: 10px;
+      border-radius: 6px;
+      font-size: 12px;
+    }
+
+    .settings-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+
+    .history-log {
+      max-height: 100px;
+      overflow-y: auto;
+      font-size: 11px;
+      margin-top: 8px;
+      color: #5f6368;
+      border-top: 1px solid #eee;
+      padding-top: 6px;
+    }
+
+    /* Assistant Specific Styles */
+    .assistant-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 8px;
+    }
+
+    .assistant-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .header-text h3 {
+      margin: 0;
+      color: #1a73e8;
+      font-size: 15px;
+    }
+
+    .header-text span {
+      font-size: 11px;
+      color: #5f6368;
+    }
+  </style>
+  <style>
+    /* Tab Navigation */
+    .tabs {
+      display: flex;
+      border-bottom: 1px solid #eee;
+      margin-bottom: 10px;
+    }
+
+    .tab-btn {
+      flex: 1;
+      text-align: center;
+      padding: 8px 0;
+      font-size: 13px;
+      font-weight: 500;
+      color: #5f6368;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+    }
+
+    .tab-btn:hover {
+      background: #f8f9fa;
+    }
+
+    .tab-btn.active {
+      color: #1a73e8;
+      border-bottom: 2px solid #1a73e8;
+    }
+
+    /* Tab Content */
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    /* Scanner Styles */
+    .risk-badge {
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: bold;
+      color: white;
+    }
+
+    .risk-critical {
+      background: #d93025;
+    }
+
+    .risk-high {
+      background: #e37400;
+    }
+
+    .risk-medium {
+      background: #f9ab00;
+      color: #333;
+    }
+
+    .risk-low {
+      background: #188038;
+    }
+
+    .risk-safe {
+      background: #5f6368;
+    }
+  </style>
+
+  <div class="assistant-header">
+    <img src="icons/assistant.png" class="assistant-icon" alt="Assistant">
+    <div class="header-text">
+      <h3>AntiPhish Guardian</h3>
+      <span>Security Assistant</span>
+    </div>
+  </div>
+
+  <!-- TABS -->
+  <div class="tabs">
+    <div class="tab-btn active" data-tab="tab-analysis">Analysis</div>
+    <div class="tab-btn" data-tab="tab-scanner">Ext. Scanner</div>
+  </div>
+
+  <!-- TAB 1: SITE ANALYSIS -->
+  <div id="tab-analysis" class="tab-content active">
+    <p id="status" class="status">Initializing...</p>
+    <div id="pageInfo">No page data yet.</div>
+
+    <button id="refreshBtn">Refresh Analysis</button>
+
+    <div class="p4-box" id="p4Panel">
+      <div class="settings-row">
+        <strong>Adaptive AI</strong>
+        <span id="aiStatus" style="color:green; font-weight:bold;">ON</span>
+      </div>
+      <div id="aiBreakdown" style="color:#1a73e8; margin-top:4px;">Waiting for analysis...</div>
+    </div>
+
+    <div class="settings-box">
+      <div class="settings-row">
+        <strong>Auto-Protection</strong>
+        <span id="protectStatus" style="color:green; font-weight:bold;">ON</span>
+      </div>
+      <!-- Assistant Toggles -->
+      <div class="settings-row" style="margin-top:8px; border-top:1px solid #eee; padding-top:6px;">
+        <label style="display:flex; align-items:center; gap:6px; cursor:pointer;">
+          <input type="checkbox" id="toggleBubble" checked> Enable Assistant Bubble
+        </label>
+      </div>
+      <div class="settings-row">
+        <label style="display:flex; align-items:center; gap:6px; cursor:pointer;">
+          <input type="checkbox" id="toggleVoice" checked> Enable Voice Alerts
+        </label>
+      </div>
+      <!-- End Assistant Toggles -->
+
+      <!-- PHASE 7: Telegram Voice Alerts -->
+      <div style="margin-top:8px; border-top:1px solid #eee; padding-top:6px;">
+        <div class="settings-row">
+          <label style="display:flex; align-items:center; gap:6px; cursor:pointer;">
+            <input type="checkbox" id="toggleTelegram"> Enable Telegram Voice Alerts
+          </label>
+          <span id="telegramStatus" style="font-weight:bold; font-size:11px; color:#999;">OFF</span>
+        </div>
+        <div style="color:#888; font-size:10px; margin-top:2px;">
+          Receive voice alerts on Telegram when phishing is blocked.
+        </div>
+        <div id="telegramInfo" style="display:none; margin-top:4px; font-size:10px; color:#1a73e8;">
+          Your ID: <span id="telegramUserIdDisplay">—</span>
+        </div>
+      </div>
+      <!-- End Telegram -->
+
+      <div style="color: #666; font-size: 10px; margin-bottom: 6px; margin-top:8px;">Blocks dangerous forms & clears
+        cookies.</div>
+      <button id="toggleProtectBtn">Disable Protection</button>
+    </div>
+
+    <div class="history-log" id="actionLog">
+      <i>No recent automated actions.</i>
+    </div>
+  </div>
+
+  <!-- TAB 2: EXTENSION SCANNER -->
+  <div id="tab-scanner" class="tab-content">
+    <div id="scannerStats" style="margin-bottom:8px; font-size:12px; font-weight:600; color:#5f6368;">
+      Scanning extensions...
+    </div>
+    <div id="scannerList" style="max-height: 400px; overflow-y: auto;">
+      <!-- Items injected here -->
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+  </body>
+
+  </html>

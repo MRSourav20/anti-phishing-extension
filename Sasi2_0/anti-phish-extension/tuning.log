@@ -1,0 +1,14 @@
+2025-12-28 12:00:00 - Baseline
+- Initial weights set. 
+- Typosquat weight: 0.25. Password weight: 0.30.
+
+2025-12-28 12:15:00 - Test Run #1
+- `high_typosquat.html` score was 0.55 (Medium).
+- Requirement: Typosquat + Password should be High (>0.60).
+- Action: Increased `typosquat` weight to 0.30 and `password_field` to 0.35.
+- Result: Score now ~0.65 -> HIGH.
+
+2025-12-28 12:30:00 - Safety Cap Adjustment
+- `medium_kw_only.html` (keyword stuffing) was scoring 0.64.
+- Action: Enforced `lang_only_cap` at 0.45.
+- Result: Score capped at 0.45 -> MEDIUM.

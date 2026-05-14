@@ -1,0 +1,38 @@
+{
+    "weights": {
+        "keyword": 0.08,
+        "keyword_max": 0.30,
+        "password_field": 0.35,
+        "email_form_with_keyword": 0.18,
+        "generic_submit": 0.10,
+        "hidden_inputs": 0.08,
+        "js_submit": 0.12,
+        "typosquat": 0.30,
+        "brand_in_url": 0.20,
+        "suspicious_tld": 0.12,
+        "ip_url": 0.20,
+        "form_action_mismatch": 0.30,
+        "form_http": 0.25,
+        "cookie_weak_flags": 0.10,
+        "cookie_long_expiry": 0.08,
+        "redirect_chain": 0.12
+    },
+    "caps": {
+        "language_max": 0.30,
+        "lang_only_cap": 0.45,
+        "password_only_cap": 0.55
+    },
+    "thresholds": {
+        "low_upper": 0.30,
+        "medium_upper": 0.59,
+        "high_lower": 0.60
+    },
+    "allowlist": [
+        "google.com",
+        "linkedin.com",
+        "microsoft.com",
+        "github.com",
+        "amazon.com"
+    ],
+    "ttl_ms": 300000
+}

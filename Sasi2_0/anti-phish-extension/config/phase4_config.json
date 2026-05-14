@@ -1,0 +1,32 @@
+{
+    "reputation": {
+        "newDomainDays": 30,
+        "newDomainAdjustment": 0.18,
+        "suspiciousTldAdjustment": 0.12,
+        "blockMassAdjustmentPerBlock": 0.06,
+        "overridePenaltyPerOverride": -0.08,
+        "maxAdjustment": 0.35,
+        "minAdjustment": -0.25,
+        "decayWindowDays": 30,
+        "decayFactor": 0.5
+    },
+    "reRank": {
+        "phase2Weight": 0.4,
+        "blockCountWeight": 0.2,
+        "domainAgeWeight": 0.15,
+        "categoriesHitWeight": 0.25,
+        "maxAdjustment": 0.25,
+        "minAdjustment": -0.2
+    },
+    "sensitivityPresets": {
+        "conservative": {
+            "scale": 0.9
+        },
+        "balanced": {
+            "scale": 1.0
+        },
+        "aggressive": {
+            "scale": 1.2
+        }
+    }
+}

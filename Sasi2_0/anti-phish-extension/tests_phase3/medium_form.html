@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>P3 Test: Medium Risk</title>
+</head>
+
+<body>
+    <h1>Survey</h1>
+    <p>This page simulates MEDIUM risk: Just email + keywords but no password/bad domain.</p>
+    <p><strong>Expected:</strong> Warning in popup, but submit ALLOWED (since default is High-only blocking).</p>
+    <form action="/submit">
+        Verify Email: <input type="email" name="email"><br>
+        <button type="submit">Verify Account</button>
+    </form>
+    <!-- Keywords: verify account -->
+</body>
+
+</html>

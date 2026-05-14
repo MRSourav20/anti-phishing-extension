@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>P3 Test: High Risk Typosquat</title>
+    <!-- Override to simulate domain mismatch/typosquat -->
+    <meta name="test-hostname" content="g0ogle.com">
+</head>
+
+<body>
+    <h1>Login</h1>
+    <p>This page simulates a HIGH risk trigger: Typosquat + Password.</p>
+    <p><strong>Expected:</strong> Submit blocked immediately. Cookies cleared.</p>
+    <form action="/submit-creds">
+        Username: <input type="text" name="u"><br>
+        Password: <input type="password" name="p"><br>
+        <button type="submit">Log In</button>
+    </form>
+</body>
+
+</html>

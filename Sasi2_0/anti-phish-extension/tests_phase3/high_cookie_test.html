@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>P3 Test: Cookie Clear Verification</title>
+    <!-- Override hostname to trigger HIGH risk (Typosquat) -->
+    <meta name="test-hostname" content="g0ogle.com">
+    <style>
+        body {
+            font-family: sans-serif;
+            padding: 20px;
+            max-width: 600px;
+        }
+
+        .box {
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 8px;
+            background: #f9f9f9;
+        }
+
+        .cookie-status {
+            margin-top: 10px;
+            padding: 10px;
+            background: #eee;
+            font-family: monospace;
+        }
+
+        input {
+            display: block;
+            margin: 10px 0;
+            padding: 8px;
+            width: 100%;
+        }
+
+        button {
+            padding: 10px 20px;
+            background: #d93025;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        // 1. Set a test cookie on load
+        document.cookie = "antiphish_test=active_session; path=/; max-age=3600";
+        console.log("Cookie set: antiphish_test=active_session");
+
+        function checkCookie() {
+            const val = document.cookie.match(/antiphish_test=([^;]+)/);
+            const el = document.getElementById('cStatus');
+            if (val) {
+                el.innerText = "✅ Cookie Active: " + val[1];
+                el.style.color = "green";
+            } else {
+                el.innerText = "❌ Cookie Cleared / Missing";
+                el.style.color = "red";
+            }
+        }
+
+        setInterval(checkCookie, 1000);
+        window.onload = checkCookie;
+    </script>
+</head>
+
+<body>
+    <h1>Security Alert</h1>
+    <p>Please verify your account immediately.</p>
+
+    <div class="box">
+        <h3>Cookie Status</h3>
+        <div id="cStatus" class="cookie-status">Checking...</div>
+        <p><em>(This status auto-updates every second)</em></p>
+    </div>
+
+    <hr>
+
+    <form action="/phish-submit">
+        <label>Email Address</label>
+        <input type="email" name="email" value="victim@example.com">
+
+        <label>Password</label>
+        <input type="password" name="password" placeholder="Enter password">
+
+        <button type="submit">Verify Identity</button>
+    </form>
+</body>
+
+</html>

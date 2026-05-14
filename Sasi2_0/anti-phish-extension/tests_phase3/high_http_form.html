@@ -1,0 +1,18 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>P3 Test: High Risk HTTP</title>
+</head>
+
+<body>
+    <h1>Secure Update</h1>
+    <p>This page simulates HIGH risk: HTTP submit on Password form.</p>
+    <p><strong>Expected:</strong> Submit blocked immediately.</p>
+    <form action="http://insecure-site.com/auth" method="POST">
+        New Password: <input type="password" name="newpass"><br>
+        <button type="submit">Update</button>
+    </form>
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+# DEMO SCRIPT: Phase 4 Adaptive Intelligence
+
+## Setup
+1. Ensure extension is loaded (Phase 4 version).
+2. Open Chrome DevTools (F12) on the extension background page to see logs.
+
+## Scenario 1: The "New Threat" (Re-Ranking in Action)
+1. Open `tests_phase3/high_cookie_test.html`.
+   *   *(Use the Python server URL: http://localhost:8000/tests_phase3/high_cookie_test.html)*
+2. Observe Popup:
+   *   **Base Score:** ~0.60
+   *   **Final Score:** Likely higher if you have blocked it before (Reputation penalty).
+   *   **AI Breakdown:** Look for `Rep: +0.XX`.
+3. Action: Click **Submit**.
+   *   **Result:** BLOCK (Red Modal).
+   *   **Log:** Console shows `PHASE4: ... Final=0.XX`.
+
+## Scenario 2: The "False Positive" (Feedback Loop)
+1. On the Blocking Modal from Scenario 1, click **"Continue Anyway (Unsafe)"**.
+2. Confirm the dialog.
+3. Reload the page.
+4. Check Popup again.
+   *   **AI Breakdown:** Should show a **Negative** adjustment (e.g., `Rep: -0.08`).
+   *   **Reason:** "User overrides (1)".
+   *   *Note: This proves the system "learned" to trust your decision locally.*
+
+## Scenario 3: Transparency
+1. Click the "Adaptive AI" toggle in the Popup (simulated UI, mainly visual).
+2. See the detailed breakdown of how the score was constructed.
+   *   "Phase 2 (Static Rules) + Reputation (History) + Re-Ranker (Context)".
+
+## Key Takeaway for Judges
+"AntiPhish Guardian doesn't just block known threats; it learns from your context and adapts instantly without sharing your data."

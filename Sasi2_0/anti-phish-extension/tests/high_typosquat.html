@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>High Risk (Typosquat)</title>
+    <!-- OVERRIDE HOSTNAME FOR TESTING -->
+    <meta name="test-hostname" content="g0ogle.com">
+</head>
+
+<body>
+    <h1>Google Login</h1>
+    <p>Sign in to continue</p>
+    <form action="/auth">
+        <input type="password" name="pass">
+        <button type="submit">Sign in</button>
+    </form>
+    <!-- Simulates g0ogle.com (Typosquat) + Password (Form) = High Risk -->
+</body>
+
+</html>

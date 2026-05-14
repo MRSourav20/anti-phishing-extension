@@ -1,0 +1,44 @@
+{
+  "manifest_version": 3,
+  "name": "AntiPhish Guardian - Phase 7",
+  "version": "0.7.0",
+  "description": "Anti-phishing browser extension with heuristic analysis, AI manipulation defense, extension scanner, and remote Telegram voice alerts.",
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "storage",
+    "cookies",
+    "management",
+    "notifications"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/16.png",
+      "48": "icons/48.png",
+      "128": "icons/128.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "icons": {
+    "16": "icons/16.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  }
+}
